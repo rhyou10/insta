@@ -12,6 +12,13 @@
         <script src= "{% static  "bootstrap-5.1.3-dist\js\bootstrap.min.js" %}"></script>
     </head>
     <body>
+      {% if messages %}
+        {% for message in messages %}
+          <div class = 'alert alert-{{message.tags}}'>
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif%}
 
         <div class='border-bottom mb-3'>
             <div class='container'>

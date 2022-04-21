@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Third apps
+    'bootstrap4',
     'debug_toolbar',
 
     #local apps
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +94,10 @@ DATABASES = {
     }
 }
 
+
+
+# AUTH_USER_MODEL = "auth.User" # 기본값
+AUTH_USER_MODEL = 'accounts.User' #user table 변할때 사용해야 한다. 일반적으로 db.sqllite 삭제후 다시 migrate
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
