@@ -29,3 +29,7 @@ class SignupForm(UserCreationForm):
         return email
     
 
+class ProfileFrom(forms.ModelForm):
+    class Meta:
+        model= User
+        fields = ['avatar', 'first_name', 'last_name', 'website_url', 'bio', 'phone_number', 'gender']
