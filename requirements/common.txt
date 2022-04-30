@@ -1,4 +1,4 @@
 django~=4.0.4
 pillow
-djnago-bootstrap4
+django-bootstrap4
 django-pydenticon
