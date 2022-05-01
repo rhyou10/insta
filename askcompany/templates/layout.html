@@ -44,11 +44,13 @@
                               <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'profile_edit' %}">
                                 {{user}}
                                 {% if user.is_authenticated %}
-                                  {% if user.avatar %}
+
+                                <img src="{{user.avatar_url}}" style="width:24px; height=24px;">
+                                  {% comment %} {% if user.avatar %}
                                     <img src="{{user.avatar.url}}" style="width:24px; height=24px;"> 
                                   {% else %}
                                     <img src="{% url "pydenticon_image" user.username%}" style="width:24px; height=24px;">
-                                  {% endif %}
+                                  {% endif %} {% endcomment %}
                                 {% endif %}
                                                             
                                   
