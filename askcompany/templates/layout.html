@@ -45,7 +45,7 @@
                                 {{user}}
                                 {% if user.is_authenticated %}
 
-                                <img src="{{user.avatar_url}}" style="width:24px; height=24px;">
+                                  <img class="rounded-circle" src="{{user.avatar_url}}" style="width:24px; height=24px;">
                                   {% comment %} {% if user.avatar %}
                                     <img src="{{user.avatar.url}}" style="width:24px; height=24px;"> 
                                   {% else %}
