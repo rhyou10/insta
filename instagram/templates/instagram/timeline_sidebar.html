@@ -1,0 +1,29 @@
+<div class="d-flex p-3 mb-3">
+    <div class="me-3">
+        <img src='{{user.avatar_url}}' style='width: 48px; height: 48px;' class="rounded-circle"/>
+    </div>
+
+    <div class="">
+        {{user.username}}<br/>
+        <small class='text-muted'>{{user.name}}</small>
+    </div>
+</div>
+
+<div class='card mb-3'>
+    <div class='card-header'>
+        Stories
+    </div>
+    <div class='card-body text-muted'>
+        stories show
+    </div>
+</div>
+
+<div class='card mb-3'>
+    <div class='card-header'>
+        suggest for you
+    </div>
+    <div class='card-body text-muted'>
+        {% include "instagram/timeline_sidebar_user_follow.html" with friend_user=user %}
+
+    </div>
+</div>
