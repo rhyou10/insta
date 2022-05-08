@@ -23,7 +23,13 @@
         suggest for you
     </div>
     <div class='card-body text-muted'>
-        {% include "instagram/timeline_sidebar_user_follow.html" with friend_user=user %}
+        {% for suggested_user in suggested_user_list %}
+
+            {% include "instagram/timeline_sidebar_user_follow.html" with friend_user=suggested_user %}
+        {% empty %}
+            추천유저가 없습니다.
+
+        {% endfor%}
 
     </div>
 </div>

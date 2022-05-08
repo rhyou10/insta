@@ -10,6 +10,8 @@ class User(AbstractUser):
         MALE = "M", "남성"
         Female = "F", "여성"
 
+    follower_set= models.ManyToManyField("self", blank=True) #유저간의 관계
+    following_set = models.ManyToManyField("self", blank=True)
 
 
     website_url = models.URLField(blank=True)
