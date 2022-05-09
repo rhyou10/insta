@@ -7,17 +7,29 @@ from django.db.models import Q
 from .models import Post, Tag
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.utils import timezone
+
+from datetime import timedelta
 
 @login_required
 def index(request):
+
+    timesince=timezone.now() - timedelta(days=3) #3일 이전의 시간만
+    # 팔로윙 한 유저의 게시물만 본다.
     post_list = Post.objects.all()\
                             .filter(
                                 Q(author=request.user) |
                                 Q(author__in=request.user.following_set.all())
-                            ) # 팔로윙 한 유저의 게시물만 본다.
+                            )\
+                            .filter(
+                                created_at__lte=timesince #less than equal
+                            )
+
+
     suggested_user_list = get_user_model().objects.all()\
                             .exclude(pk=request.user.pk)\
                             .exclude(pk__in=request.user.following_set.all())[:3]
+                            
     return render(request, "instagram/index.html",{
         'post_list' : post_list,
         'suggested_user_list' : suggested_user_list
@@ -53,6 +65,14 @@ def post_detail(request, pk):
 
 def user_page(request,username):
     page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
+
+    
+
+    if request.user.is_authenticated:
+        is_follow = request.user.following_set.filter(pk=page_user.pk).exists() #로그인시 user, 없을시 annoymoususer
+    else:
+        is_follow = False
+
     post_list = Post.objects.filter(author=page_user)
     post_list_count = post_list.count() #실제 데이터베이스 count 쿼리를 던지게된다. 이게 더 빠르다.
     #len(post_list) # 이경우 메모리를 많이 사용한다.
@@ -60,4 +80,5 @@ def user_page(request,username):
         "page_user" : page_user,
         "post_list" : post_list,
         "post_list_count" : post_list_count,
+        "is_follow":is_follow,
     })

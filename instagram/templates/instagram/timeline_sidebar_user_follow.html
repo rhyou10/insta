@@ -7,7 +7,9 @@
         <img src="{{suggested_user.avatar_url}}" style='width:32px; height:32px;' class="rounded-circle">
     </div>
     <div class="">
-        {{suggested_user.name}}
+        <a href= {% url "instagram:user_page" suggested_user.username %}>
+            {{suggested_user.name}}
+        </a>
 
     </div>
     <div class="ms-auto">
