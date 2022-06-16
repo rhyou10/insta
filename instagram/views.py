@@ -63,6 +63,25 @@ def post_detail(request, pk):
     }
     )
 
+@login_required
+def post_like(request, pk):
+    post = get_object_or_404(Post,pk=pk)
+    #TODO : like 처리
+    messages.success(request, f"{post}를 좋아합니다.")
+    redirect_url=request.META.get("HTTP_REFERER", "root") #현재페이지 가지고오기
+    return redirect(redirect_url)
+
+
+@login_required
+def post_unlike(request, pk):
+    post = get_object_or_404(Post,pk=pk)
+    #TODO : unlike 처리
+    messages.success(request, f"{post}좋야요를 취소합니다.")
+    redirect_url=request.META.get("HTTP_REFERER", "root") #현재페이지 가지고오기
+    return redirect(redirect_url)
+
+
+
 def user_page(request,username):
     page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
 

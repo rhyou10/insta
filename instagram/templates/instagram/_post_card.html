@@ -12,12 +12,15 @@
         {%else%}
             <img src="/media/no_img.jpg">
         {% endif%}
+        {% for tag in post.tag_set.all%}
+        <span class="badge bg-primary">#{{tag.name}}</span>
+        
+        {% endfor %}
     </div>
 
     <div class = 'card-footer'>
-        {% for tag in post.tag_set.all%}
-            <span class="badge bg-primary">#{{tag.name}}</span>
-            
-        {% endfor %}
+        <i class="fa-solid fa-heart"></i>
+        <i class="fa-thin fa-heart"></i>
+
     </div>
 </div>

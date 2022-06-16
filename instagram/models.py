@@ -13,12 +13,15 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Post(BaseModel ):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class Post(BaseModel):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+                                ,related_name='my_post_set') #외래키를 사용시 자동으로 호출명을 만든다. 중복되는 경우 방지위하여 related_name 설정
     photo = models.ImageField(upload_to='instagram/post/%Y/%m/%d',blank=True)
     caption = models.TextField(max_length=500) #
     tag_set = models.ManyToManyField('Tag', blank=True)
     location = models.CharField(max_length=100)
+    like_user_set = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+                                            related_name='like_post_set')
 
     def __str__(self):
         return self.caption
@@ -47,3 +50,7 @@ class Tag(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+# class LikeUser(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
