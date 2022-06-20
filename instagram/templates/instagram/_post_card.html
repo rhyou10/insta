@@ -1,3 +1,4 @@
+{% load instagram_tags %}
 <div class='card'>
     <div class ='card-header'>
         <img src="{{post.author.avatar_url}}" style="width:32px; height=32px;">
@@ -19,8 +20,15 @@
     </div>
 
     <div class = 'card-footer'>
-        <i class="fa-solid fa-heart"></i>
-        <i class="fa-thin fa-heart"></i>
+        {% if post|is_like_user:user %}
+            <a href="{% url "instagram:post_unlike" post.pk  %}" style="color:inherit;">
+                <i class="fa-solid fa-heart"></i>
+            </a>
+        {% else %}
+            <a href="{% url "instagram:post_like" post.pk  %}" style="color:inherit;">
+                <i class="fa-regular fa-heart"></i>
+            </a>
+        {% endif %}
 
     </div>
 </div>
